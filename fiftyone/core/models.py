@@ -436,6 +436,9 @@ def _apply_image_model_data_loader(
                 else:
                     labels_batch = model.predict_all(imgs)
 
+                if not isinstance(labels_batch, list):
+                    labels_batch = [labels_batch,]
+
                 for sample, labels in zip(sample_batch, labels_batch):
                     if filename_maker is not None:
                         _export_arrays(labels, sample.filepath, filename_maker)
